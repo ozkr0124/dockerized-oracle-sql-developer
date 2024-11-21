@@ -1,3 +1,6 @@
+<div align="center">
+  <img src="images/banner-docker-oracle-sql-developer.png" alt="Dockerized Oracle SQL Developer" width="600">
+</div>
 
 # Dockerized Oracle SQL Developer
 
@@ -70,8 +73,13 @@ docker-compose -f docker-compose.arm64.yml down -v
 # or
 docker-compose -f docker-compose.amd64.yml down -v
 ```
+# Screen Recoder
 
-## Technical Details
+<div align="center">
+  <img src="images/screen-recorder.gif" alt="Dockerized Oracle SQL Developer" width="600">
+</div>
+
+# Technical Details
 
 ### Base Images
 

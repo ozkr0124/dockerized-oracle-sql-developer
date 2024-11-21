@@ -1,3 +1,7 @@
+<div align="center">
+  <img src="images/banner-docker-oracle-sql-developer.png" alt="Dockerized Oracle SQL Developer" width="600">
+</div>
+
 # Dockerized Oracle SQL Developer
 
 Este proyecto proporciona un contenedor Docker para ejecutar Oracle SQL Developer, una herramienta de gestión de bases de datos Oracle. Los contenedores están configurados para soportar arquitecturas **amd64** y **arm64** mediante `docker-compose`. 
@@ -69,8 +73,13 @@ docker-compose -f docker-compose.arm64.yml down -v
 # o
 docker-compose -f docker-compose.amd64.yml down -v
 ```
+# Grabación de pantalla
 
-## Detalles técnicos
+<div align="center">
+  <img src="images/screen-recorder.gif" alt="Dockerized Oracle SQL Developer" width="600">
+</div>
+
+# Detalles técnicos
 
 ### Imágenes base
 
