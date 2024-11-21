@@ -1,0 +1,39 @@
+FROM --platform=linux/arm64 ubuntu:22.04 AS build_arm64
+
+ENV DISPLAY=:1
+ENV PATH="${PATH}:/app/sqldeveloper/sqldeveloper/bin"
+
+RUN apt-get update && apt-get upgrade -y \
+    && apt-get install -y \
+    wget \
+    unzip \
+    supervisor \
+    xterm \
+    dbus-x11 \
+    x11-xserver-utils \
+    openbox \
+    openbox-gnome-session \
+    openjdk-17-jdk
+
+RUN wget https://github.com/kasmtech/KasmVNC/releases/download/v1.3.3/kasmvncserver_jammy_1.3.3_arm64.deb
+RUN apt-get install ./kasmvncserver_jammy_1.3.3_arm64.deb -y && rm ./kasmvncserver_jammy_1.3.3_arm64.deb
+
+WORKDIR /app
+
+# get and install sqldeveloper
+RUN wget -O /app/sqldeveloper-24.3.0.284.2209-no-jre.zip https://download.oracle.com/otn_software/java/sqldeveloper/sqldeveloper-24.3.0.284.2209-no-jre.zip
+RUN unzip /app/sqldeveloper-24.3.0.284.2209-no-jre.zip -d /app/ && rm /app/sqldeveloper-24.3.0.284.2209-no-jre.zip
+
+RUN apt-get clean \
+    && rm -rf /var/lib/apt/lists/*
+
+COPY /root/menu.xml /etc/xdg/openbox/menu.xml
+RUN chmod 644 /etc/xdg/openbox/menu.xml
+COPY /root/sql-dev.png /etc/xdg/openbox/sql-dev.png
+
+COPY ./supervisor/supervisor.conf /etc/supervisor.conf
+
+
+EXPOSE 8444
+
+CMD [ "supervisord", "-c", "/etc/supervisor.conf", "-n"]

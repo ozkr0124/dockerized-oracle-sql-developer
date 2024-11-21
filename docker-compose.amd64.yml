@@ -1,0 +1,21 @@
+name: stack-osdev
+
+services:
+  oracle-sql-developer:
+    # image: oracle-sql-developer:1.0.1-amd64
+    build:
+      context: .
+      dockerfile: Dockerfile.amd64
+    restart: unless-stopped
+    platform: linux/amd64
+    security_opt:
+      - seccomp:unconfined #optional
+    ports:
+      - 8444:8444
+    environment:
+      - TZ=America/Bogota
+    volumes:
+      - sqldeveloper-data:/config/.sqldeveloper
+
+volumes:
+  sqldeveloper-data:
