@@ -2,20 +2,20 @@ name: stack-osdev
 
 services:
   oracle-sql-developer:
-    #image: ozkr0124/oracle-sql-developer:1.0.0
-    build:
-      context: .
-      dockerfile: Dockerfile.arm64
+    image: ozkr0124/oracle-sql-developer:1.0.0
+    # build:
+    #   context: .
+    #   dockerfile: Dockerfile.arm64
     restart: unless-stopped
     platform: linux/arm64
     security_opt:
       - seccomp:unconfined #optional
-    environment:
-      - TZ=America/Bogota
     ports:
       - 8444:8444
+    environment:
+      - TZ=America/Bogota
     volumes:
-      - sqldeveloper-data:/config/.sqldeveloper
+      - sqldeveloper-data:/root/.sqldeveloper
 
 volumes:
   sqldeveloper-data:
